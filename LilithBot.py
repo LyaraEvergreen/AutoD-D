@@ -4,7 +4,7 @@ def d10(): return(randint(1,10))
 def d20(): return(randint(1,20))
 
 profBonus, dexMod= 4, 5
-weaponMod = 0
+weaponMod = 3
 toHit = profBonus + dexMod + weaponMod
 crit, atRange = 0, 2
 hitLastAtk, advantage = 0, 0
