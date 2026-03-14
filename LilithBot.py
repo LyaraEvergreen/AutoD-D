@@ -6,7 +6,7 @@ def d20(): return(randint(1,20))
 profBonus, dexMod= 4, 5
 weaponMod = 3
 toHit = profBonus + dexMod + weaponMod
-crit, atRange = 0, 2
+crit, atRange = 0, 1
 hitLastAtk, advantage = 0, 0
 combatRound = 1
 actionSurge, surging = True, False
@@ -27,6 +27,7 @@ def rollD20():
     return(roll)
 
 def makeAttacks():
+    global hitLastAtk
     # Attack One
     roll = rollD20()
     if(roll == 20):
@@ -67,7 +68,8 @@ def makeAttacks():
                 print("Rolled {0} for the fourth attack\t| Damage: {1} {2}".format(roll + toHit, hitDice()() + dexMod + weaponMod + (2*atRange),damageType()))
             hitLastAtk = 0
 
-def makeBonusAttacks(dancing):
+def makeBonusAttacks():
+    global hitLastAtk, dancing
     # Attack One
     roll = rollD20()
     if(roll == 20):
@@ -79,7 +81,7 @@ def makeBonusAttacks(dancing):
             hitLastAtk = 1
         else: hitLastAtk = 0
     
-    if ((dancing) and input("End your dance to make another attack? ").lower().strip() in ["y","yes"]):
+    if (dancing and input("End your dance to make another attack? ").lower().strip() in ["y","yes"]):
         # Attack Two
         roll = rollD20()
         if(roll == 20):
@@ -93,6 +95,8 @@ inCombat = (input("In Fight? ").lower().strip()  in ["yes","y"])
 while inCombat:
     print("Round {0}".format(combatRound))
     usingFire = input("Ignite fans? ").lower().strip() in ["y","yes"]
+    atRange = input("At range? ").lower().strip() in ["y","yes"]
+    
     if (dancing):
         if (input("Still Dancing? ").lower().strip() in ["yes","y"]):
             next
@@ -111,7 +115,7 @@ while inCombat:
 
     if(not started):
         if (input("Make a bonus action attack? ").lower().strip() in ["y","yes"]):
-            makeBonusAttacks(dancing)
+            makeBonusAttacks()
 
     if (actionSurge):
         if (input("Would you like to Action Surge? ").lower().strip() in ["y","yes"]):

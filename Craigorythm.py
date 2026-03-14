@@ -38,7 +38,8 @@ def damageDice():
         case "s":
             return max(d8(), 3) + (useCharge * max(d8(), 3))
 
-def makeAttacks(crit):
+def makeAttacks():
+    global crit
     # Attack One
     roll = rollD20()
     if(roll == 20):
@@ -75,9 +76,8 @@ def makeAttacks(crit):
         if sap:
             print("If you hit an opponent, they have disadvatage on their next attack.")
     
-    return crit
-
-def hew(crit):
+def hew():
+    global crit
     # Hew
     if(crit > 0): 
         print("You crit an opponent so you get Hew")
@@ -102,7 +102,6 @@ def hew(crit):
             if sap:
                 print("If you hit an opponent, they have disadvatage on their next attack.")
         
-        return crit
 
 inCombat = (input("In Fight? ").lower().strip()  in ["yes","y"])
 while inCombat:
@@ -153,7 +152,7 @@ while inCombat:
             heavy = 0
 
     
-    crit = makeAttacks(crit)
+    makeAttacks()
 
     if (actionSurge):
         if (input("Would you like to Action Surge? ").lower().strip() in ["y","yes"]):
@@ -179,7 +178,7 @@ while inCombat:
                 print("Your Smite deals {0} Fire Damage".format(d6()))
     
     if not smite:
-        crit = hew(crit)
+        hew()
 
     reckless = 0
     weaponModifier, smite, cleave, topple, graze, sap = 0, False, False, False, False, False
