@@ -202,11 +202,13 @@ while inCombat:
         if (input("Would you like to use your bonus action to smite? ").lower().strip() in ["y","yes"]):
             if (input("Do they fail a DC" + str(8 + strMod + profBonus) + " Con Save? ").lower().strip() in ["y","yes"]):
                 smite = True
+                smiteThisTurn = True
                 print("Your Smite deals {0} Fire Damage".format(d6()))
     
-    if not smite:
+    if not smiteThisTurn:
         hew()
 
+    smiteThisTurn = False
     reckless = 0
     weaponModifier, smite, cleave, topple, graze, sap = 0, False, False, False, False, False
     useCharge, adv = 0, 0
