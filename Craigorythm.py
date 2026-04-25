@@ -2,6 +2,7 @@ from random import randint
 def d6(): return(randint(1,6))
 def d8(): return(randint(1,8))
 def d10(): return(randint(1,10))
+def d12(): return(randint(1,12))
 def d20(): return(randint(1,20))
 
 rageDMG, profBonus, strMod, barbLvl = 2, 3, 4, 6
@@ -37,6 +38,8 @@ def damageDice():
             return max(d6(),3) + max(d6(),3)
         case "s":
             return max(d8(), 3) + (useCharge * max(d8(), 3))
+        case "a":
+            return max(d12(), 3)
 
 def makeAttacks():
     global crit
@@ -49,6 +52,8 @@ def makeAttacks():
             print("If you hit, impose a DC{0} Con save, on a fail, they are prone".format(8 + strMod + profBonus))
         if sap:
             print("If you hit an opponent, they have disadvatage on their next attack.")
+        if weapon == "a":
+            print("Do and extra {0} damage and gain that much temp HP".format(d6()+d6()))
     else:
         print("Rolled {0} for the first attack\t| Damage: {1} {2}".format(roll + toHit + weaponModifier, damageDice() + strMod + (heavy * profBonus) + (rageDMG * rage) + weaponModifier, damageType))
         if graze:
@@ -57,6 +62,8 @@ def makeAttacks():
             print("If you hit, impose a DC{0} Con save, on a fail, they are prone".format(8 + strMod + profBonus))
         if sap:
             print("If you hit an opponent, they have disadvatage on their next attack.")
+        if weapon == "a":
+            print("Do and extra {0} damage and gain that much temp HP".format(d6()+d6()))
 
     # Attack Two
     roll = rollD20()
@@ -67,6 +74,8 @@ def makeAttacks():
             print("If you hit, impose a DC{0} Con save, on a fail, they are prone".format(8 + strMod + profBonus))
         if sap:
             print("If you hit an opponent, they have disadvatage on their next attack.")
+        if weapon == "a":
+            print("Do and extra {0} damage and gain that much temp HP".format(d6()+d6()))
     else:
         print("Rolled {0} for the second attack\t| Damage: {1} {2}".format(roll + toHit + weaponModifier, damageDice() + strMod + (heavy * profBonus) + (rageDMG * rage) + weaponModifier, damageType))
         if graze:
@@ -75,6 +84,8 @@ def makeAttacks():
             print("If you hit, impose a DC{0} Con save, on a fail, they are prone".format(8 + strMod + profBonus))
         if sap:
             print("If you hit an opponent, they have disadvatage on their next attack.")
+        if weapon == "a":
+            print("Do and extra {0} damage and gain that much temp HP".format(d6()+d6()))
     
 def hew():
     global crit
@@ -93,6 +104,8 @@ def hew():
                 print("If you hit, impose a DC{0} Con save, on a fail, they are prone".format(8 + strMod + profBonus))
             if sap:
                 print("If you hit an opponent, they have disadvatage on their next attack.")
+            if weapon == "a":
+                print("Do and extra {0} damage and gain that much temp HP".format(d6()+d6()))
         else:
             print("Hew rolled {0}\t| Damage: {1}".format(roll + toHit + weaponModifier, damageDice() + strMod + (heavy * profBonus) + (rageDMG * rage) + weaponModifier))
             if graze:
@@ -101,6 +114,8 @@ def hew():
                 print("If you hit, impose a DC{0} Con save, on a fail, they are prone".format(8 + strMod + profBonus))
             if sap:
                 print("If you hit an opponent, they have disadvatage on their next attack.")
+            if weapon == "a":
+                print("Do and extra {0} damage and gain that much temp HP".format(d6()+d6()))
         
 
 inCombat = (input("In Fight? ").lower().strip()  in ["yes","y"])
@@ -121,7 +136,7 @@ while inCombat:
         if(input("Reckless attack? ").lower().strip()  in ["yes","y"]): 
             reckless = 1
             print("Enemies have advantage on attacks against you until the start of your next turn.")
-    match(input("Which weapon are you choosing? (H)alberd, (L)ance, (S)pear or (G)reatsword? ").lower().strip()[0]):
+    match(input("Which weapon are you choosing? (H)alberd, (L)ance, (S)pear, (A)xe or (G)reatsword? ").lower().strip()[0]):
         case "h": 
             weaponModifier = 1
             cleave = True
@@ -150,6 +165,10 @@ while inCombat:
             weapon = "s"
             damageType = "Piercing"
             heavy = 0
+        case "a":
+            cleave = True
+            weapon = "a"
+            damageType = "Slashing"
 
     
     makeAttacks()
@@ -165,8 +184,12 @@ while inCombat:
             if(roll == 20):
                 print("Nat 20 on Cleave\t| Damage: {0} {1}".format(2*damageDice() + (rageDMG * rage) + profBonus + weaponModifier, damageType))
                 crit += 1
+                if weapon == "a":
+                    print("Do and extra {0} damage and gain that much temp HP".format(d6()+d6()))
             else:
                 print("Rolled {0} for the cleave\t| Damage: {1} {2}".format(roll + toHit + weaponModifier, damageDice() + (rageDMG * rage) + profBonus + weaponModifier, damageType))
+                if weapon == "a":
+                    print("Do and extra {0} damage and gain that much temp HP".format(d6()+d6()))
         
     if (smite):
         smite = input("Is your opponent still smited? ").lower().strip() in ["y","yes"]
