@@ -24,7 +24,11 @@ def rageTemp():
     return temp
 
 def rollD20(): 
-    roll = max(d20(), d20() * max(reckless, adv))
+    rollOne = d20()
+    if (reckless or adv): rollTwo = d20() 
+    else: rollTwo = 0
+    print("[{0}] [{1}]".format(rollOne,rollTwo))
+    roll = max(rollOne, rollTwo)
     #print(roll)
     return(roll)
 
