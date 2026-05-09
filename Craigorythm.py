@@ -16,6 +16,7 @@ weapon = ""
 adv = 0
 actionSurge = True
 damageType = ""
+smiteThisTurn = False
 
 def rageTemp():
     temp = 0
