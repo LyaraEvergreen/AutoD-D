@@ -5,7 +5,7 @@ def d10(): return(randint(1,10))
 def d12(): return(randint(1,12))
 def d20(): return(randint(1,20))
 
-rageDMG, profBonus, strMod, barbLvl = 2, 3, 4, 6
+rageDMG, profBonus, strMod, barbLvl = 3, 4, 5, 9
 toHit = profBonus + strMod
 reckless, rage = 0, 0
 crit = 0
@@ -13,7 +13,7 @@ combatRound = 1
 weaponModifier, smite, cleave, topple, graze, sap, heavy = 0, False, False, False, False, False, 0
 useCharge, spearCharges = 0, 6
 weapon = ""
-adv = 1
+adv = 0
 actionSurge = True
 damageType = ""
 
