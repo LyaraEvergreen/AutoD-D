@@ -57,7 +57,8 @@ def makeAttacks():
         if sap:
             print("If you hit an opponent, they have disadvatage on their next attack.")
         if weapon == "a":
-            print("Do and extra {0} damage and gain that much temp HP".format(d6()+d6()))
+            axeExtra = d6() + d6()
+            print("Do and extra {0} damage and gain {1} temp HP".format(2 * axeExtra, axeExtra))
     else:
         print("Rolled {0} for the first attack\t| Damage: {1} {2}".format(roll + toHit + weaponModifier, damageDice() + strMod + (heavy * profBonus) + (rageDMG * rage) + weaponModifier, damageType))
         if graze:
@@ -79,7 +80,8 @@ def makeAttacks():
         if sap:
             print("If you hit an opponent, they have disadvatage on their next attack.")
         if weapon == "a":
-            print("Do and extra {0} damage and gain that much temp HP".format(d6()+d6()))
+            axeExtra = d6() + d6()
+            print("Do and extra {0} damage and gain {1} temp HP".format(2 * axeExtra, axeExtra))
     else:
         print("Rolled {0} for the second attack\t| Damage: {1} {2}".format(roll + toHit + weaponModifier, damageDice() + strMod + (heavy * profBonus) + (rageDMG * rage) + weaponModifier, damageType))
         if graze:
@@ -109,7 +111,8 @@ def hew():
             if sap:
                 print("If you hit an opponent, they have disadvatage on their next attack.")
             if weapon == "a":
-                print("Do and extra {0} damage and gain that much temp HP".format(d6()+d6()))
+                axeExtra = d6() + d6()
+                print("Do and extra {0} damage and gain {1} temp HP".format(2 * axeExtra, axeExtra))
         else:
             print("Hew rolled {0}\t| Damage: {1}".format(roll + toHit + weaponModifier, damageDice() + strMod + (heavy * profBonus) + (rageDMG * rage) + weaponModifier))
             if graze:
@@ -189,7 +192,8 @@ while inCombat:
                 print("Nat 20 on Cleave\t| Damage: {0} {1}".format(2*damageDice() + (rageDMG * rage) + profBonus + weaponModifier, damageType))
                 crit += 1
                 if weapon == "a":
-                    print("Do and extra {0} damage and gain that much temp HP".format(d6()+d6()))
+                    axeExtra = d6() + d6()
+                    print("Do and extra {0} damage and gain {1} temp HP".format(2 * axeExtra, axeExtra))
             else:
                 print("Rolled {0} for the cleave\t| Damage: {1} {2}".format(roll + toHit + weaponModifier, damageDice() + (rageDMG * rage) + profBonus + weaponModifier, damageType))
                 if weapon == "a":
